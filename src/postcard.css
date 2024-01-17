@@ -1,0 +1,6 @@
+.post-card{display:flex; height: 100px; width: 100%;margin-bottom: var(--m20);}
+.post-card>img{width:100px; height: 100%; object-fit: cover;}
+.post-card-desc{width: 80%;height: 100%;}
+.post-card-desc>p{margin-left: 20px; color: var(--grey);font-size: var(--sm); margin-bottom:var(--m5) ;}
+.post-card-desc>h3{margin-left: 20px;font-size: var(--l); margin-top: 0px;}
+.post-card-desc>h3>a:hover{color:var(--skyblue)}

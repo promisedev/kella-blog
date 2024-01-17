@@ -1,0 +1,41 @@
+.blog-card{ width:100%; height: 400px; display:flex;align-items: center; justify-content: center;margin-bottom: var(--m40); }
+@media screen and (max-width:430px) {
+ .blog-card{ height: 400px; background-color: none; }   
+}
+/* ---------------------------------------------------------- */
+.blog-card-img{width:45%; height: 250px;}
+
+@media screen and (max-width:430px) {
+.blog-card-img{width:35%; height: 150px;}    
+}
+
+.blog-card-desc{width:40%; height:100%; background:none; margin-left: var(--m30);display:flex; flex-direction: column; justify-content: center;}
+@media screen and (max-width:430px) {
+   .blog-card-desc{width:50%; height:100%; background:none; margin-left: var(--m10);display:flex; flex-direction: column; justify-content: center;}
+}
+/* ----------------------------------------------------------------------- */
+.blog-title-cont{ width: 100%; height: auto; border: 2px solid var(--skyblue); display: flex; flex-direction: column; justify-content: center; align-items: center; padding-bottom: var(--m20);}
+.blog-title-cont>p{ text-transform: capitalize;}
+.blog-title-cont>h2{text-align: center;margin-top: var(--m5); width: 95%; text-transform: uppercase;}
+
+@media screen and (max-width:430px) {
+ .blog-title-cont>p{}
+.blog-title-cont>h2{text-align: center;margin-top: var(--m5); width: 95%; font-size: var(--l);}   
+}
+.blog-title-cont>h2>a:hover{color:var(--skyblue)}
+.blog-title-foot{display: flex;}
+.blog-title-foot>p{ font-size: var(--s);}
+.blog-date{padding:0; margin:0;color:var(--lightgrey)}
+.blog-author{padding:0; margin:0;font-weight: bold; margin-left: var(--m30);}
+/* ----------------------------------------------------------------------------- */
+.blog-desc{width: 100%;}
+/* --------------------------------------------------------------------------- */
+.blog-actions{display:flex; justify-content: space-between; width: 95%;}
+.blog-icon{font-size: var(--sm);}
+.blog-comment{}
+.blog-comment>span{margin-left: var(--m10);}
+.blog-social{display: flex;}
+.blog-social>span{margin-right: var(--m20); color: var(--skyblue);}
+.blog-social-list{display:flex; list-style-type: none;margin: 0; padding: 0;}
+.blog-social-list>li{margin-right: var(--m10);}
+
