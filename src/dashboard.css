@@ -364,6 +364,7 @@
   flex-direction: column;
   align-items: center;padding-bottom: 40px;padding-left: var(--m20);
 }
+
 .dash-table-cont::-webkit-scrollbar {
   width: 6px;
   background-color: none;
@@ -406,6 +407,7 @@
   padding-bottom: 15px;
   padding-top: 15px; text-transform: capitalize;
 }
+.blog_t_title{width: 30%; text-align: left;}
 .af-link-status{padding:5px 10px 5px 10px;font-size: var(--sm); background: rgb(174, 231, 174);border-radius: 12px;}
 .af-link-status-expire{background: rgb(243, 137, 84);}
 .af-ctr-cont{position: relative; display: flex; height: 30px;align-items: center; justify-content: center;}

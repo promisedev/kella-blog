@@ -1,7 +1,7 @@
 import axios from "axios";
 
 const Axios = axios.create({
-  baseURL: "http://localhost:5001/api/v1/dashboard",
+  baseURL: "https://kella.netlify.app/.netlify/functions/api/dashboard",
   withCredentials: true,
 });
 

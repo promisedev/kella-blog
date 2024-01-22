@@ -1,24 +1,27 @@
 import React from "react";
-import FormComp from "./formblog";
+import FormComp from "./formblogedit";
 import { useState } from "react";
 import { useEffect } from "react";
+import { useGlobalContext } from "../../context_api/Appcontext";
 
 const Productedit = ({ data }) => {
   const {
+    slug,
     excerpt,
-    product_title,
-    product_price,
-    on_discount,
-    discount,
-    affiliate_partner,
-    affiliate_link,
+    blog_title,
+    blog_image,
+    category,
+    tag,
+    author,
+    blog_content,
   } = data;
+  const { loading, state } = useGlobalContext();
+  const [formInput, setFormInput] = useState({ ...data });
 
-  const [formInput, setFormInput] = useState({});
   const [inputError, setInputError] = useState({});
 
   useEffect(() => {
-    setFormInput(data);
+    setFormInput(formInput);
   }, [formInput]);
 
   const Publish = (e) => {
@@ -26,14 +29,11 @@ const Productedit = ({ data }) => {
     console.log("form input:", formInput, "Errors:", inputError);
 
     if (
+      inputError.slug !== "" ||
       inputError.excerpt !== "" ||
-      inputError.product_title !== "" ||
-      inputError.product_price !== "" ||
-      inputError.on_discount !== "" ||
-      inputError.discount !== "" ||
-      inputError.affiliate_partner !== "" ||
-      inputError.affiliate_link !== "" ||
-      inputError.link_expiry_date !== ""
+      inputError.blog_title !== "" ||
+      inputError.tag !== "" ||
+      inputError.author !== ""
     ) {
       return null;
     } else {
@@ -44,103 +44,96 @@ const Productedit = ({ data }) => {
   return (
     <div className="edit-modal-cont">
       <div className="schema-overlay-head">
-        <h2>{product_title} </h2> <button onClick={Publish}>Publish</button>
+        <h2>{blog_title} </h2>{" "}
+        <button onClick={Publish}>
+          {loading ? "Uploading..." : "Publish"}
+        </button>
       </div>
       <form className="schema-form" onSubmit={Publish}>
+        {/* --------------------------------------- */}
+        <FormComp
+          name="slug"
+          formInput={formInput}
+          setFormInput={setFormInput}
+          setInputError={setInputError}
+          maxLen={200}
+          type="text"
+          inputtype="input"
+        />
         {/* --------------------------------------- */}
         <FormComp
           name="excerpt"
           formInput={formInput}
           setFormInput={setFormInput}
           setInputError={setInputError}
-          maxLen={210}
+          maxLen={125}
           type="text"
           inputtype="input"
         />
         {/* ------------------------------ */}
         <FormComp
-          name="product_title"
+          name="blog_title"
           formInput={formInput}
           setFormInput={setFormInput}
           setInputError={setInputError}
-          maxLen={100}
+          maxLen={50}
+          type="text"
+          inputtype="input"
+        />
+        {/* ------------------------------ */}
+        {/* ------------------------------ */}
+        <FormComp
+          name="tag"
+          formInput={formInput}
+          setFormInput={setFormInput}
+          setInputError={setInputError}
+          maxLen={30}
           type="text"
           inputtype="input"
         />
         {/* ------------------------------ */}
         <FormComp
-          name="product_price"
+          name="author"
+          formInput={formInput}
+          setFormInput={setFormInput}
+          setInputError={setInputError}
+          maxLen={30}
+          type="text"
+          inputtype="input"
+        />
+        {/* ------------------------------ */}
+        <FormComp
+          name="blog_content"
           formInput={formInput}
           setFormInput={setFormInput}
           setInputError={setInputError}
           maxLen={100}
           type="number"
-          inputtype="input"
-        />
-        {/* --------------------------------------- */}
-        <FormComp
-          name="affiliate_link"
-          formInput={formInput}
-          setFormInput={setFormInput}
-          setInputError={setInputError}
-          maxLen={300}
-          type="text"
-          inputtype="input"
+          inputtype="richtext"
         />
         {/* ------------------------------- */}
-        <FormComp
-          name="link_expiry_date"
-          formInput={formInput}
-          setFormInput={setFormInput}
-          setInputError={setInputError}
-          maxLen={12}
-          type="date"
-          inputtype="input"
-        />
-        {/* ------------------------------- */}
-        {/* --------------------------------------- */}
-        <FormComp
-          name="affiliate_partner"
-          formInput={formInput}
-          setFormInput={setFormInput}
-          setInputError={setInputError}
-          maxLen={100}
-          type="text"
-          inputtype="input"
-        />
-        <FormComp
-          name="on_discount"
+        {/* <FormComp
+          name="category"
           formInput={formInput}
           setFormInput={setFormInput}
           setInputError={setInputError}
           maxLen={100}
           type="radio"
-          inputtype="boolean"
-        />
+          inputtype="category"
+        /> */}
         {/* -------------------------------- */}
-        <FormComp
-          name="discount"
-          formInput={formInput}
-          setFormInput={setFormInput}
-          setInputError={setInputError}
-          maxLen={100}
-          type="number"
-          inputtype="input"
-        />
-        {/* -------------------------------- */}
-
-        <FormComp
-          name="product_images"
+        {/* <FormComp
+          name="blog_image"
           formInput={formInput}
           setFormInput={setFormInput}
           setInputError={setInputError}
           maxLen={100}
           type="file"
           inputtype="file"
-        />
-        <button className="form-button" onClick={Publish}>
-          Publish
-        </button>
+        /> */}
+        <button className="form-button" onClick={Publish} disabled={loading}>
+          {loading ? "Uploading..." : "Publish"}
+        </button>{" "}
       </form>
     </div>
   );

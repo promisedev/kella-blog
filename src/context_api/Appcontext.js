@@ -20,16 +20,16 @@ const AppContext = createContext();
 const AppProvider = ({ children }) => {
   const [cookies, setCookie] = useCookies(null);
   const [loading, setLoading] = useState(false);
-   const [uploaded, setUploaded] = useState(false);
-   const [ serverErr,setServerErr] = useState(false)
-   const [ serverMsg,setServerMsg] = useState("")
+  const [uploaded, setUploaded] = useState(false);
+  const [serverErr, setServerErr] = useState(false);
+  const [serverMsg, setServerMsg] = useState("");
   // ----------------------------functions for login-----------------------------------------
   const Login = async (payload) => {
     await Axios2.post("/login", payload)
       .then(async (res) => {
         await Axios1.post(
           "/user",
-          {},
+          { user_id: res.data.user_id },
           { headers: { Authorization: `Bearer ${res.data.accesstoken}` } }
         )
           .then((res) => {
@@ -69,23 +69,20 @@ const AppProvider = ({ children }) => {
 
     // -----------------------------upload all images
     for (let i = 0; i < payload?.blog_image?.length; i++) {
-      const imageref = ref(
-        storage,
-        `kella/${"kella_image_" + uuid()}`
-      );
+      const imageref = ref(storage, `kella/${"kella_image_" + uuid()}`);
       uploadBytes(imageref, payload?.blog_image[i]).then(() => {
         getDownloadURL(imageref).then(async (url) => {
           images.push(url);
 
           if (images.length == payload?.blog_image?.length) {
-            console.log(payload?.slug)
-             setServerErr(false);
+            console.log(payload?.slug);
+            setServerErr(false);
             await Axios2.post("/blog", {
               slug: payload?.slug,
               excerpt: payload?.excerpt,
-              blog_title: payload?.blog_title,              
+              blog_title: payload?.blog_title,
               blog_image: images,
-              author:payload?.author,
+              author: payload?.author,
               category: payload?.category,
               tag: payload?.tag,
               blog_content: payload?.blog_content,
@@ -101,8 +98,9 @@ const AppProvider = ({ children }) => {
               .catch((err) => {
                 setLoading(false);
                 console.log(err);
-                if(err.response.data.err == "duplicate"){
-setServerErr(true);setServerMsg("Slug name already exist");
+                if (err.response.data.err == "duplicate") {
+                  setServerErr(true);
+                  setServerMsg("Slug name already exist");
                 }
               });
           } else {
@@ -175,7 +173,7 @@ setServerErr(true);setServerMsg("Slug name already exist");
       .then(async (res) => {
         await Axios1.post(
           "/user",
-          {},
+          { user_id: res.data.user_id },
           { headers: { Authorization: `Bearer ${res.data.token}` } }
         )
           .then((res) => {

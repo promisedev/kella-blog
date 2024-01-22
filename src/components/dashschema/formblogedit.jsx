@@ -20,15 +20,25 @@ const Form = ({
   const [error, setError] = useState(true);
   const [input, setInput] = useState("");
   const [islong, setIslong] = useState(false);
-  const [rvalue, setValue] = useState(formInput?.blog_content?.[0] || "");
+  const [rvalue, setValue] = useState("");
   const { uploaded, state } = useGlobalContext();
   //  ----------------------------------------
 
+  // useEffect(() => {
+  //   setInput(rvalue);
+  //   setFormInput((prev) => ({ ...prev, blog_content: [rvalue] }));
+  //   // console.log(rvalue);
+  // }, [rvalue]);
+
   useEffect(() => {
+    if(name == "blog_content"){
+    setValue(formInput?.blog_content?.[0]);
     setInput(rvalue);
     setFormInput((prev) => ({ ...prev, blog_content: [rvalue] }));
-    // console.log(rvalue);
-  }, [rvalue]);
+   }else{
+    return 
+   }
+  }, [formInput]);
   //  ----------------------------------------------
   const AddInput = (e) => {
     setInput(e.currentTarget.value);
@@ -94,7 +104,7 @@ const Form = ({
           type={type}
           name={name}
           id={name}
-          value={formInput ? formInput[name] : ""}
+          value={formInput ? formInput?.[name] : ""}
           className={error ? " form-input inputerror" : "form-input"}
           onChange={AddInput}
         />

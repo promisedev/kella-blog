@@ -8,8 +8,10 @@ import Blogedit from "./blogedit";
 import Advertedit from "./advertedit";
 import { useEffect } from "react";
 import { useLayoutEffect } from "react";
+import { useGlobalContext } from "../../context_api/Appcontext";
 const Blogs = ({ title, data, schema }) => {
   const [isediting, setIsediting] = useState(false);
+  const {state} = useGlobalContext()
   const showOverlay = (e) => {
     e.currentTarget.parentElement.children[1].classList.add(
       "show-af-ctr-overlay"
@@ -19,10 +21,14 @@ const Blogs = ({ title, data, schema }) => {
   const removeOverlay = (e) => {
     e.currentTarget.classList.remove("show-af-ctr-overlay");
   };
-
+const [selected_product, setSelected_product]= useState({})
   const Editing = (e) => {
     e.currentTarget.parentElement.classList.remove("show-af-ctr-overlay");
+const slug = e.currentTarget.dataset.id
     setIsediting(true);
+    const blog =state?.blogs.filter((blog)=>blog.slug ==slug)[0]
+    console.log(blog)
+    setSelected_product(blog)
   };
 
   const CloseModal = (e) => {
@@ -30,15 +36,7 @@ const Blogs = ({ title, data, schema }) => {
   };
 
   // ------------------------------dummy data
-  const selected_product = {
-    product_title: "iphone 15",
-    product_price: 40.5,
-    on_discount: false,
-    discount: 0,
-    affiliate_partner: "amazon",
-    affiliate_link: "https://amazon.com",
-    excerpt: "some dummy description about the product",
-  };
+  
   //   --------------------------------------
   return (
     <section className="dash-all-product-cont">
@@ -61,11 +59,13 @@ const Blogs = ({ title, data, schema }) => {
           </tr>
 
           {/* ------------------------------------- */}
-          {data?.map((item, index) => (
+          {data?.map((item, index) => { 
+            const date = new Date(item?.createdAt).toDateString();
+            return(
             <tr key={index}>
-              <td>iphone 15</td>
+              <td className="blog_t_title">{item?.blog_title}</td>
               <td>product schema</td>
-              <td> 18 Dec 2022</td>
+              <td>{date}</td>
               <td>
                 {" "}
                 <span
@@ -81,7 +81,7 @@ const Blogs = ({ title, data, schema }) => {
               <td className=" af-ctr-cont">
                 <BsThreeDots className=" af-ctr" onClick={showOverlay} />
                 <div className=" af-ctr-overlay" onMouseLeave={removeOverlay}>
-                  <p className="af-ctr-txt" onClick={Editing}>
+                  <p className="af-ctr-txt" data-id={item.slug} onClick={Editing}>
                     <LiaEditSolid className=" af-ctr-icon" />
                     Edit
                   </p>
@@ -92,7 +92,7 @@ const Blogs = ({ title, data, schema }) => {
                 </div>
               </td>
             </tr>
-          ))}
+          )})}
         </table>
       </div>
       {isediting ? (
@@ -100,7 +100,7 @@ const Blogs = ({ title, data, schema }) => {
           <div className="edit-modal-ctr " onClick={CloseModal}>
             <p>Close Modal</p>
           </div>
-          {schema == "productschema" ? (
+          {schema == "blogschema" ? (
             <Blogedit data={selected_product} />
           ) : (
             <Advertedit data={selected_product} />
