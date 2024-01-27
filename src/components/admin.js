@@ -233,7 +233,7 @@ const Dashbord = () => {
           </section>
         </section>
       ) : (
-        null
+        <div style={{ height: "100vh" }}></div>
       )}
     </>
   );
