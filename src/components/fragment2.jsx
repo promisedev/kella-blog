@@ -12,6 +12,7 @@ import {
   FaPinterestP,
 } from "react-icons/fa6";
 import { Link } from 'gatsby';
+import Searchcomp from './searchcomp';
 const Fragment2 = () => {
     const {state} = useGlobalContext()
   return (
@@ -57,26 +58,17 @@ const Fragment2 = () => {
         </ul>
       </div>
       {/* --------------***search bar**--------------------------- */}
-      <form className="form-search">
-        <div className="search-div">
-          <input
-            type="text"
-            name="search"
-            placeholder="Search..."
-            className="search-input"
-          />
-          <button className="search-button">
-            <LuSearch />
-          </button>
-        </div>
-      </form>
+      <Searchcomp />
       {/* --------------*********latest post*******----------------------------- */}
       <div className="newsletter-cont">
         <Title title="latest post" />
         <div className="latest-post-cont">
-          {state?.blogs.filter((blog,index)=>index>2).filter((blog,index)=>index<5).map((post, index) => (
-            <PostCard data={post} />
-          ))}
+          {state?.blogs
+            .filter((blog, index) => index > 2)
+            .filter((blog, index) => index < 5)
+            .map((post, index) => (
+              <PostCard data={post} />
+            ))}
         </div>
       </div>
       {/* --------************social links*********************---------------- */}
@@ -95,19 +87,7 @@ const Fragment2 = () => {
         </ul>
       </div>
       {/* --------------***search bar**--------------------------- */}
-      <form className="form-search">
-        <div className="search-div">
-          <input
-            type="text"
-            name="search"
-            placeholder="Search..."
-            className="search-input"
-          />
-          <button className="search-button">
-            <LuSearch />
-          </button>
-        </div>
-      </form>
+      <Searchcomp />
       {/* -------------ads banner2-------------------- */}
       <div className="newsletter-cont">
         <Title title="banner" />

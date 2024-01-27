@@ -4,7 +4,7 @@ import { useState } from "react";
 import { useEffect } from "react";
 import { useGlobalContext } from "../../context_api/Appcontext";
 
-const Productedit = ({ data }) => {
+const Productedit = ({ data, setIsediting }) => {
   const {
     slug,
     excerpt,
@@ -15,7 +15,7 @@ const Productedit = ({ data }) => {
     author,
     blog_content,
   } = data;
-  const { loading, state } = useGlobalContext();
+  const { loading, state, dispatch, uploaded } = useGlobalContext();
   const [formInput, setFormInput] = useState({ ...data });
 
   const [inputError, setInputError] = useState({});
@@ -23,22 +23,36 @@ const Productedit = ({ data }) => {
   useEffect(() => {
     setFormInput(formInput);
   }, [formInput]);
-
+  // ---------------------------------
+const onSuccess=()=>{
+  setIsediting(false)
+  console.log("tasking")
+}
+useEffect(()=>{
+  if(uploaded){
+onSuccess()
+  }else{return}
+},[uploaded])
+// -----------------------------
   const Publish = (e) => {
     e.preventDefault();
     console.log("form input:", formInput, "Errors:", inputError);
 
     if (
-      inputError.slug !== "" ||
       inputError.excerpt !== "" ||
       inputError.blog_title !== "" ||
       inputError.tag !== "" ||
-      inputError.author !== ""
+      inputError.author !== "" ||
+      inputError.blog_content !== ""
     ) {
       return null;
     } else {
       // submit form
-      console.log(formInput);
+    
+      dispatch({ type: "BLOG_UPDATE", payload: formInput })
+     
+     
+     
     }
   };
   return (
@@ -51,7 +65,7 @@ const Productedit = ({ data }) => {
       </div>
       <form className="schema-form" onSubmit={Publish}>
         {/* --------------------------------------- */}
-        <FormComp
+        {/* <FormComp
           name="slug"
           formInput={formInput}
           setFormInput={setFormInput}
@@ -59,7 +73,7 @@ const Productedit = ({ data }) => {
           maxLen={200}
           type="text"
           inputtype="input"
-        />
+        /> */}
         {/* --------------------------------------- */}
         <FormComp
           name="excerpt"

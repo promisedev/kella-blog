@@ -5,21 +5,55 @@
   align-items: center;
   justify-content: center;
 }
+@media screen and (max-width:470px) {
+  .login-cont {
+  height: 100vh;
+  display: flex;
+  flex-direction: row;
+  align-items: flex-start;
+  justify-content: center;
+}
+}
 .login-container {
   width: 70%;
   height: 75%;
   display: flex;
   justify-content: space-between;
 }
+@media screen and (max-width:470px) {
+  .login-container {
+  width: 80%;
+  height: 75%;
+  display: flex; flex-direction: column;
+  justify-content: space-evenly
+}
+}
+/* ----------------------------------- */
 .login-info {
   width: 35%;
   height: 100%;
+} 
+
+@media screen and (max-width:470px) {
+  .login-info {
+  width: 100%;
+  height: auto;
+}
 }
 .login-info > h1 {
   width: 90%;
   font-size: var(--xl);
   font-weight: bold;
   margin-bottom: 70px;
+}
+
+@media screen and (max-width:470px) {
+  .login-info > h1 {
+  width: 90%;
+  font-size: var(--xl);
+  font-weight: bold;
+  margin-bottom: 30px;
+}
 }
 .login-info > p {
   margin: 0;
@@ -34,6 +68,14 @@
   height: 100%;
   display: flex;
   flex-direction: column;
+}
+@media screen and (max-width:470px) {
+  .login-form {
+  width: 100%;
+  height: auto;
+  display: flex;
+  flex-direction: column;
+}
 }
 .login-form-div {
   width: 100%;

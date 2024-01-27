@@ -27,8 +27,18 @@ const Header = ({ floathead, float }) => {
     setshowside(false);
   };
   // ------------------------------------------
+  const dropMenu = (e) => {
+    e.currentTarget.children[0].classList.add("show_header_drop");
+  };
+  const removeDropMenu = (e) => {
+    e.currentTarget.children[0].classList.remove("show_header_drop");
+  };
   // ---------------------------------
+  const dropMenu2 = (e) => {
+    e.currentTarget.children[1].classList.toggle("show_mobile_drop");
+  };
 
+  // ----------------------------------------------
   return (
     <section className="parent header-wrapper">
       <nav
@@ -46,16 +56,32 @@ const Header = ({ floathead, float }) => {
         {/* -------------------frag------------------------ */}
         <ul className="nav_pages2">
           {Pages().map((page, index) => (
-            <li key={index}>
+            <>
               {page.categories ? (
-                <span>
-                  {page.title}
-                  <MdArrowDropDown />
-                </span>
+                <li
+                  key={index}
+                  onClick={dropMenu}
+                  onMouseLeave={removeDropMenu}
+                >
+                  <ul className="header_drop">
+                    {page.categories?.map((page, index) => (
+                      <li>
+                        <Link to={page.link}> {page.title}</Link>
+                      </li>
+                    ))}
+                  </ul>
+                  <span>
+                    {page.title}
+                    <MdArrowDropDown />
+                  </span>
+                </li>
               ) : (
-                <Link to={page.link}>{page.title} </Link>
+                <li>
+                  {" "}
+                  <Link to={page.link}>{page.title} </Link>
+                </li>
               )}
-            </li>
+            </>
           ))}
         </ul>
         {/* ---------------------frag-------------------------------- */}
@@ -98,16 +124,40 @@ const Header = ({ floathead, float }) => {
         {/* -------------- */}
         <ul className="side_nav_pages">
           {Pages().map((page, index) => (
-            <li key={index}>
+            <>
               {page.categories ? (
-                <span>
-                  {page.title}
-                  <MdArrowDropDown />
-                </span>
+                <li key={index} onClick={dropMenu2}>
+                  <span>
+                    {page.title}
+                    <MdArrowDropDown />
+                  </span>
+                  {/* ---------------------------- */}
+                  <ul className="mobile_drop">
+                    {page.categories?.map((page, index) => (
+                      <li>
+                        <Link to={page.link}> {page.title}</Link>
+                      </li>
+                    ))}
+                  </ul>
+                  {/* ---------------------------- */}
+                </li>
               ) : (
-                <Link to={page.link}>{page.title} </Link>
+                <li>
+                  {" "}
+                  <Link to={page.link}>{page.title} </Link>
+                </li>
               )}
-            </li>
+            </>
+            // <li key={index}>
+            //   {page.categories ? (
+            //     <span>
+            //       {page.title}
+            //       <MdArrowDropDown />
+            //     </span>
+            //   ) : (
+            //     <Link to={page.link}>{page.title} </Link>
+            //   )}
+            // </li>
           ))}
         </ul>
         {/* --------------------------------------- */}

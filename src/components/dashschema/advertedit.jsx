@@ -3,7 +3,7 @@ import FormComp from "./formhero";
 import { useState } from "react";
 import { useEffect } from "react";
 
-const Advertedit = ({ data }) => {
+const Advertedit = ({ data, setIsediting }) => {
   const {
     excerpt,
     product_title,

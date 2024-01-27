@@ -109,6 +109,38 @@ const AppProvider = ({ children }) => {
       });
     }
   };
+  // ----------------------------------------------PRODUCT UPDATE
+
+  const BlogUpdate = async (payload) => {
+    setLoading(true);
+    console.log(payload);
+    await Axios2.put("/blog", {
+      _id: payload?._id,
+      excerpt: payload?.excerpt,
+      blog_title: payload?.blog_title,
+      author: payload?.author,
+      tag: payload?.tag,
+      blog_content: payload?.blog_content,
+    })
+      .then((res) => {
+        setLoading(false);
+        setUploaded(true);
+        setTimeout(() => {
+          setUploaded(false);
+        }, 2000);
+        console.log(res);
+      })
+      .catch((err) => {
+        setLoading(false);
+        console.log(err);
+        // if (err.response.data.err == "duplicate") {
+        //   setServerErr(true);
+        //   setServerMsg("Slug name already exist");
+        // }
+      });
+    // -----------------------------upload all images
+  };
+
   // ----------------------------------------------------------
   const advertUpload = (payload) => {
     setLoading(true);
@@ -248,6 +280,14 @@ const AppProvider = ({ children }) => {
           return state;
         }
         break;
+
+      case "BLOG_UPDATE":
+        {
+          BlogUpdate(action.payload);
+          return state;
+        }
+        break;
+
       case "UPLOAD_ADVERT":
         {
           advertUpload(action.payload);
@@ -306,7 +346,7 @@ const AppProvider = ({ children }) => {
         state,
         dispatch,
         cookies,
-        loading,
+        loading,uploaded,
         ProductPagination,
         serverMsg,
         serverErr,

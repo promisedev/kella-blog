@@ -3,4 +3,11 @@
 .post-card-desc{width: 80%;height: 100%;}
 .post-card-desc>p{margin-left: 20px; color: var(--grey);font-size: var(--sm); margin-bottom:var(--m5) ;}
 .post-card-desc>h3{margin-left: 20px;font-size: var(--l); margin-top: 0px;}
+
+@media screen and (max-width:912px) {
+ .post-card-desc>h3{margin-left: 20px;font-size: var(--s); margin-top: 0px;}   
+}
+@media screen and (max-width:770px) {
+ .post-card-desc>h3{margin-left: 20px;font-size: var(--sm); margin-top: 0px;}   
+}
 .post-card-desc>h3>a:hover{color:var(--skyblue)}

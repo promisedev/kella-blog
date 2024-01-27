@@ -8,6 +8,7 @@ import { IoRemoveCircleOutline } from "react-icons/io5";
 import ReactQuill from "react-quill";
 import "react-quill/dist/quill.snow.css";
 import { useGlobalContext } from "../../context_api/Appcontext";
+import { useLayoutEffect } from "react";
 const Form = ({
   name,
   formInput,
@@ -32,13 +33,16 @@ const Form = ({
 
   useEffect(() => {
     if(name == "blog_content"){
-    setValue(formInput?.blog_content?.[0]);
     setInput(rvalue);
     setFormInput((prev) => ({ ...prev, blog_content: [rvalue] }));
    }else{
     return 
    }
-  }, [formInput]);
+  }, [rvalue]);
+
+  useLayoutEffect(()=>{
+    setValue( rvalue || formInput?.blog_content?.[0])
+  },[rvalue])
   //  ----------------------------------------------
   const AddInput = (e) => {
     setInput(e.currentTarget.value);

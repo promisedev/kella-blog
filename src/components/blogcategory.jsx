@@ -19,6 +19,7 @@ import {
   FaFacebookF,
   FaPinterestP,
 } from "react-icons/fa6";
+import Searchcomp from "./searchcomp";
 
 const Productcategory = ({ data }) => {
   const {
@@ -157,24 +158,13 @@ const Productcategory = ({ data }) => {
             </ul>
           </div>
           {/* --------------***search bar**--------------------------- */}
-          <form className="form-search">
-            <div className="search-div">
-              <input
-                type="text"
-                name="search"
-                placeholder="Search..."
-                className="search-input"
-              />
-              <button className="search-button">
-                <LuSearch />
-              </button>
-            </div>
-          </form>
+          <Searchcomp />
           {/* --------------*********latest post*******----------------------------- */}
           <div className="newsletter-cont">
             <Title title="trending post" />
             <div className="latest-post-cont">
-              {state?.blogs.filter((blog, index) => index < 5)
+              {state?.blogs
+                .filter((blog, index) => index < 5)
                 .map((post, index) => (
                   <PostCard data={post} />
                 ))}
@@ -196,19 +186,7 @@ const Productcategory = ({ data }) => {
             </ul>
           </div>
           {/* --------------***search bar**--------------------------- */}
-          <form className="form-search">
-            <div className="search-div">
-              <input
-                type="text"
-                name="search"
-                placeholder="Search..."
-                className="search-input"
-              />
-              <button className="search-button">
-                <LuSearch />
-              </button>
-            </div>
-          </form>
+          <Searchcomp />
           {/* -------------ads banner2-------------------- */}
           <div className="newsletter-cont">
             <Title title="banner" />

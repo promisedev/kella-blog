@@ -20,7 +20,7 @@ const Form = ({
   const [error, setError] = useState(true);
   const [input, setInput] = useState("");
   const [islong, setIslong] = useState(false);
-  const [rvalue, setValue] = useState(formInput?.blog_content?.[0] || "");
+  const [rvalue, setValue] = useState("");
   const { uploaded, state } = useGlobalContext();
   //  ----------------------------------------
 
