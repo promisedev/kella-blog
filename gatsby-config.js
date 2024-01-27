@@ -11,9 +11,27 @@
  * @type {import('gatsby').GatsbyConfig}
  */
 module.exports = {
-  siteMetadata:{data:[
-    { title: "health", link: "/health", desc:"some dummy description about the category type"},
-    { title: "fashion", link: "/fashion", desc:"some dummy description about the category type"},
-    { title: "lifestyle", link: "/lifestyle",desc:"some dummy description about the category type" }]},
+  flags: {
+    DEV_SSR: true,
+  },
+  siteMetadata: {
+    data: [
+      {
+        title: "health",
+        link: "/health",
+        desc: "some dummy description about the category type",
+      },
+      {
+        title: "fashion",
+        link: "/fashion",
+        desc: "some dummy description about the category type",
+      },
+      {
+        title: "lifestyle",
+        link: "/lifestyle",
+        desc: "some dummy description about the category type",
+      },
+    ],
+  },
   plugins: ["gatsby-plugin-use-query-params"],
 };
