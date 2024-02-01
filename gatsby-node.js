@@ -19,7 +19,8 @@ exports.createPages = async ({ graphql, actions }) => {
     createPage({
       path: `/categories/${title}`,
       component: path.resolve(`src/template/categoryTemp.jsx`),
-      context: { slug: title},
+      context: { slug: title },
+      defer: true,
     });
   });
 };

@@ -6,7 +6,8 @@ import { Category } from "../../utils/metaData";
 import { TfiDropbox } from "react-icons/tfi";
 import { IoRemoveCircleOutline } from "react-icons/io5";
 import ReactQuill from "react-quill";
-import "react-quill/dist/quill.snow.css";
+// import "react-quill/dist/quill.snow.css";
+
 import { useGlobalContext } from "../../context_api/Appcontext";
 import { useLayoutEffect } from "react";
 const Form = ({
@@ -173,7 +174,9 @@ const Form = ({
         </div>
       ) : inputtype == "richtext" ? (
         <div className="rich-wrapper">
-          <ReactQuill theme="snow" value={rvalue} onChange={setValue} />
+          
+            <ReactQuill theme="snow" value={rvalue} onChange={setValue} />
+        
         </div>
       ) : (
         <>

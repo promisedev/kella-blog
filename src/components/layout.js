@@ -7,7 +7,7 @@ import "../auth.css";
 import "../card.css";
 import "../postcard.css"
 import "../blog.css"
-
+import "react-quill/dist/quill.snow.css";
 import Footer from "./footer";
 import { CookiesProvider } from "react-cookie";
 import { AppProvider } from "../context_api/Appcontext";

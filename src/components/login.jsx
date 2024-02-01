@@ -27,7 +27,7 @@ const Login = () => {
     const isuser = Object.values(state.user).length>0;
     console.log(isuser);
     if (isuser) {
-      navigate("/admin",{replace:true});
+      navigate("/dashboard",{replace:true});
       return
     }else{
         return
